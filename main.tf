@@ -1,10 +1,11 @@
 terraform {
-    cloud {
+   /* cloud {
     organization = "policy-as-code-training"
     workspaces {
       name = "tf-vault-qa-arn"
     }
   }
+  */
   required_providers {
     aws = {
       source = "hashicorp/aws"
@@ -35,8 +36,14 @@ module "vpc" {
 
   tags = {
     project     = "project-alpha",
-    environment = "dev"
+    environment = "Development"
   }
+}
+
+module "ec2_instances" {
+  source = "./modules/aws-instance"
+  instance_count = var.instance_count
+  instance_type  = var.instance_type
 }
 
 module "app_security_group" {
@@ -51,7 +58,7 @@ module "app_security_group" {
 
   tags = {
     project     = "project-alpha",
-    environment = "dev"
+    environment = "Development"
   }
 }
 
@@ -67,7 +74,7 @@ module "lb_security_group" {
 
   tags = {
     project     = "project-alpha",
-    environment = "dev"
+    environment = "Development"
   }
 }
 
@@ -108,7 +115,7 @@ module "elb_http" {
 
   tags = {
     project     = "project-alpha",
-    environment = "dev"
+    environment = "Development"
   }
 }
 
@@ -122,6 +129,6 @@ module "ec2_instances" {
 
   tags = {
     project     = "project-alpha",
-    environment = "dev"
+    environment = "Development""
   }
 }
